@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Web Scripting Waitlist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style2.css">
+
+</head>
+<body>
+  <header>
+    <h1>Web Scripting Waitlist</h1>
+  </header>
+
+  <p>Sign up below to enter the waitlist of Web Scripting (CS275). 
+    You will recieve a confirmation within 1-2 business days</p>
+  <main>
+    <form action="/signup" method="get">
+      <fieldset class="card" style="width:100%;">
+        <legend><strong>Sign up for waitlist</strong></legend>
+
+        <!-- Field: Full Name -->
+        <div class="field">
+          <label for="full-name">Full name</label>
+          <input
+            id="full-name"
+            type="text"
+            name="fullName"
+            placeholder="John Doe"
+            autocomplete="name"
+            required
+            minlength="2"
+            aria-describedby="full-name-hint" />
+          <small id="full-name-hint">Use your real name.</small>
+        </div>
+        <!-- Field: Email Address -->
+        <div class="field">
+          <label for="email">Email address</label>
+          <input
+            id="email"         
+            type="email"
+            name="email"
+            placeholder="example@huntington.edu"
+            autocomplete="email"
+            required
+            aria-describedby="email-hint" />
+          <small id="email-hint">We'll send a confirmation to this address.</small>
+        </div>
+
+        <!-- Field: Phone Number -->
+        <div class="field">
+            <label for="phone">Phone Number</label>
+           <input
+            id="phone"
+            type="tel"
+            name="phone"
+            placeholder="123-456-7890"
+            autocomplete="tel"
+            required
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            aria-describedby="phone-hint" />
+          <small id="phone-hint">We'll send a confirmation to this number.</small>
+        </div>
+
+        <!-- Field: Password -->
+        <div class="field">
+          <label for="pwd">Password</label>
+          <input
+            id="pwd"
+            type="password"
+            name="password"
+            required
+            minlength="8"
+            aria-describedby="pwd-hint"
+            autocomplete="new-password" />
+          <small id="pwd-hint">At least 8 characters, include a number.</small>
+        </div>
+
+        <!-- Field: Confirm Password -->
+        <div class="field">
+          <label for="pwd2">Confirm password</label>
+          <input
+            id="pwd2"
+            type="password"
+            name="confirmpassword"
+            required
+            minlength="8"
+            autocomplete="new-password" />
+          <small>Re-enter your password.</small>
+        </div>
+
+        <!-- Field: Role in class (select) -->
+        <div class="field">
+          <label for="role">Class Role</label>
+          <select id="role" name="role" required aria-describedby="fav-hint">
+            <option value="">— Select one —</option>
+            <option>Student</option>
+            <option>Auditor</option>
+            <option>Teacher</option>
+            <option>Other</option>
+          </select>
+          <small id="fav-hint">Pick your role in the class.</small>
+        </div>
+
+        <!-- Field: Agree to terms and consitions -->
+        <div class="field">
+          <label for="optin">
+            <input id="optin" type="checkbox" name="optin" value="yes" required/>
+            Agree to terms and conditions
+          </label>
+        </div>
+
+        <div class="field">
+          <button type="submit" class="card">Enter Waitlist</button>
+        </div>
+      </fieldset>
+    </form>
+
+ 
+  </main>
+
+  <footer>
+    © Sign up • CS275 HW#4
+  </footer>
+</body>
+</html>
