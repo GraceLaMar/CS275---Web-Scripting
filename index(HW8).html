@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React To-Do List with Tests</title>
+
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</script>
+
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script type="text/babel">
+
+    function assert(condition,message) {
+      if (!condition) {
+        throw new Error(message);
+      }
+    }
+
+    function TodoList({ title, items}) {
+      return (
+        <>
+        <h2>{title}</h2>
+        <ul>
+          {items.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      </>
+      );
+    }
+    
+    function App() {
+      const items = ["Milk","Eggs","Bread"];
+      const [results, setResults] = React.useState([]);
+      
+      function runTests() {
+        const output = [];
+
+        function record(name, fn) {
+          try {
+            fn();
+            output.push({ name, pass: true});
+          } catch (e) {
+            output.push({ name, pass: false});
+          }
+        }
+
+        record("Title renders correctly", () => {
+          assert(
+            document.querySelector("h2").textContent === "My Tasks",
+            "Wrong title"
+          );
+        });
+
+        record("Correct number of items", () => {
+          assert(
+            document.querySelectorAll("li").length === items.length,
+            "Wrong Number of items"
+          );
+        });
+        record("Empty list renders correctly", () => {
+
+          assert(
+            document.querySelectorAll("li").length === 0,
+            "Empty list should have 0 items"
+          );
+        });
+
+        record("Items array not modified", () => {
+          const copy = [...items];
+
+          root.render(<TodoList title="Test" items={original} />);
+
+          assert(
+            JSON.stringify(original) === JSON.stringify(copy),
+            "Array was changed"
+          );
+        });
+        
+        record("Items render in correct order", () => {
+          const first = document.querySelector("li");
+          assert(
+            first.textContent === "Milk",
+            "Order Inncorect"
+          );
+        });
+
+          root.render(<App />);
+
+        setResults(output);
+      }
+
+      return (
+        <div>
+          <TodoList title="My Tasks" items={items} />
+
+          <button onClick={runTests}>Run Tests</button>
+
+          <div>
+            {results.map((r,i) => (
+              <div key={i} className={r.pass ? "pass" : "fail"}>
+                {r.pass ? "PASS" : "FAIL"} {r.name}
+              </div>  
+            ))}
+          </div>
+        </div>  
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("app"));
+    root.render(<App />);
+  </script>
+
+</body>
